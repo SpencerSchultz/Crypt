@@ -9,4 +9,8 @@ public class Floor implements TileInterface {
 		return "normal floor";
 	}
 
+	public String getPath() {
+		return "GreyShingles";
+	}
+
 }

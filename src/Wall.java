@@ -9,4 +9,8 @@ public class Wall implements TileInterface {
 		return "normal wall";
 	}
 
+	public String getPath() {
+		return "Brick";
+	}
+
 }

@@ -1,11 +1,11 @@
 import java.io.*;
-
+////////////////////MAKE SINGLETON
 public class GameMap {
 	//instance variables
 	private String name;
-	TileInterface[][] gameMapArray;
-	int mapHeight;
-	int mapWidth;
+	private static TileInterface[][] gameMapArray;
+	private static int mapHeight;
+	private static int mapWidth;
 	//factory to make tiles
 	TileFactory tileFactory = new TileFactory();
 	
@@ -29,18 +29,18 @@ public class GameMap {
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			//read first 2 lines to read size
 			line = bufferedReader.readLine();
-		    mapWidth = Integer.valueOf(line);
+			mapHeight = Integer.valueOf(line);
 		    line = bufferedReader.readLine();
-		    mapHeight = Integer.valueOf(line);
+		    mapWidth = Integer.valueOf(line);
 		    //make gameMapArray the size of the map file
-		    gameMapArray = new TileInterface[mapWidth][mapHeight];
+		    gameMapArray = new TileInterface[mapHeight][mapWidth];
 			
 			while((line = bufferedReader.readLine()) != null) {
 				//if statement check to see if the line is a comment
 				if(line.contains("#")) {
 					//do nothing
 				} else {
-					gameMapArray[xCounter][yCounter] = tileFactory.makeTile(Integer.valueOf(line));///////////////////////////////////////
+					gameMapArray[yCounter][xCounter] = tileFactory.makeTile(Integer.valueOf(line));///////////////////////////////////////
 					xCounter++;
 					//move on to next row if xCounter is equal to map width
 					if (xCounter >= mapWidth) {
@@ -60,13 +60,21 @@ public class GameMap {
 	}
 	
 
-	public TileInterface getTile(int x, int y) {
-		return gameMapArray[x][y];
+	public static TileInterface getTile(int x, int y) {
+		return gameMapArray[y][x];
 	}
 
 	
 	public void setTile(int x, int y, int tileID) {
-		gameMapArray[x][y] = tileFactory.makeTile(tileID);
+		gameMapArray[y][x] = tileFactory.makeTile(tileID);
+	}
+	
+	public static int getGameMapSizeX() {
+		return mapWidth;
+	}
+	
+	public static int getGameMapSizeY() {
+		return mapHeight;
 	}
 	
 	

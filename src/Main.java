@@ -2,8 +2,12 @@ import java.io.Console;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
 
+public class Main {
+	static MapAnimator mapAnimator = new MapAnimator();
+	static int xPosition = 1;
+	static int yPosition = 1;
+	
 	public static void main(String[] args) {
 		run();
 
@@ -13,9 +17,9 @@ public class Main {
 		GameMap gameMap = new GameMap("MapOpenRoom20x20y.txt");
 		Scanner in = new Scanner(System.in);
 		char input = 'r';
-		int xPosition = 1;
-		int yPosition = 1;
 		
+		mapAnimator.loadMap();
+		mapAnimator.drawMap();
 
 		//movement screen
 		boolean isRunning = true;
@@ -31,29 +35,29 @@ public class Main {
 			}
 			in.nextLine();
 			if (input == 'a') {
-				if (gameMap.getTile((xPosition - 1), yPosition).canBeMovedTo()) {
-					xPosition--;
+				if (gameMap.getTile((yPosition - 1), xPosition).canBeMovedTo()) {
+					yPosition--;
 					System.out.println("Moving left...");
 				} else {
 					System.out.println("Cannot move there!\n\n\n");
 				}
 			} else if (input == 'w') {
-				if (gameMap.getTile(xPosition, (yPosition - 1)).canBeMovedTo()) {
-					yPosition--;
+				if (gameMap.getTile(yPosition, (xPosition - 1)).canBeMovedTo()) {
+					xPosition--;
 					System.out.println("Moving forwards...");
 				} else {
 					System.out.println("Cannot move there!\n\n\n");
 				}
 			} else if (input == 's') {
-				if (gameMap.getTile(xPosition, (yPosition + 1)).canBeMovedTo()) {
-					yPosition++;
+				if (gameMap.getTile(yPosition, (xPosition + 1)).canBeMovedTo()) {
+					xPosition++;
 					System.out.println("Moving backwards...");
 				} else {
 					System.out.println("Cannot move there!\n\n\n");
 				}
 			} else if (input == 'd') {
-				if (gameMap.getTile((xPosition + 1), yPosition).canBeMovedTo()) {
-					xPosition++;
+				if (gameMap.getTile((yPosition + 1), xPosition).canBeMovedTo()) {
+					yPosition++;
 					System.out.println("Moving right...");
 				} else {
 					System.out.println("Cannot move there!\n\n\n");
