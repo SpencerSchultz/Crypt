@@ -7,20 +7,20 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
-public class Floor implements TileInterface {
+public class Grass implements TileInterface {
 
 	public boolean canBeMovedTo() {
 		return true;
 	}
 
 	public String getDescription() {
-		return "on a normal floor";
+		return "on normal grass";
 	}
 
-
+	
 	public Texture getTexture() {
 		Texture tex = null;
-		InputStream in = ResourceLoader.getResourceAsStream("res/tiles/GoldFloor16.png");
+		InputStream in = ResourceLoader.getResourceAsStream("res/tiles/Grass16.png");
 		try {
 			tex = TextureLoader.getTexture("PNG", in);
 		} catch (IOException e) {

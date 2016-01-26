@@ -14,7 +14,7 @@ public class Door implements TileInterface {
 	}
 
 	public String getDescription() {
-		return "normal door";
+		return "in a normal doorway";
 	}
 
 	

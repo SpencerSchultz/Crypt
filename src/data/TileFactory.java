@@ -13,6 +13,9 @@ public class TileFactory {
 		} else if (tileID == 3) {
 			tileInterface = new Door();
 			return tileInterface;
+		} else if (tileID == 4) {
+			tileInterface = new Grass();
+			return tileInterface;
 		}
 		
 		return null;

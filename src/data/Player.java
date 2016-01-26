@@ -2,6 +2,7 @@ package data;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -15,7 +16,18 @@ public class Player {
 	private int xPosition = 2;
 	private int yPosition = 2;
 	private String directionFacing = "Up"; //"Up", "Down", "Left", "Right" as values for direction facing
+	
+	private int myMaxHealth = 100;
+	private int myHealth = 100;
+	private int myAttack = 10;
+	private int myDefense = 5;
+	private int myCritChance = 20;
+	private int myExp = 0;
+	private int myLevel = 1;
 
+	static Random randomGen = new Random();//make seeded with something random (time of day?)
+	
+	
 	private Player () {}
 	
 	public static Player getInstance() {
@@ -177,5 +189,85 @@ public class Player {
 		}
 		return tex;	
 	}
+	
+	public int takeDamage(int enemyAttackValue) {
+		if (enemyAttackValue <= myDefense) {
+			return 0;
+		} else {
+			myHealth = myHealth - (enemyAttackValue - myDefense);
+			return (enemyAttackValue - myDefense);
+		}
+	}
+	
+	public int attack() {
+		if (randomGen.nextInt(100) > myCritChance) {
+			return (int) ((int)myAttack * 2.5);
+		} else {
+			return myAttack;
+		}
+	}
+	
+	public void gainExp(int exp) {
+		myExp = myExp + exp;
+		
+	}
+	
+	public boolean isLevelUp() {
+		if (myExp >= (myLevel * 100)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void levelUp() {
+		myMaxHealth = myMaxHealth + 10;
+		myHealth = myMaxHealth;
+		myAttack = myAttack + 2;
+		myDefense = myDefense + 1;
+		myLevel++;
+	}
+	
+	
+	public int getHealth() {
+		return myHealth;
+	}
+
+	public void setHealth(int myHealth) {
+		this.myHealth = myHealth;
+	}
+
+	public int getAttack() {
+		return myAttack;
+	}
+
+	public void setAttack(int myAttack) {
+		this.myAttack = myAttack;
+	}
+
+	public int getDefense() {
+		return myDefense;
+	}
+
+	public void setDefense(int myDefense) {
+		this.myDefense = myDefense;
+	}
+	
+	public int getMyCritChance() {
+		return myCritChance;
+	}
+
+	public int getLevel() {
+		return myLevel;
+	}
+
+	public int getMaxHealth() {
+		return myMaxHealth;
+	}
+
+
+
+
+
 	
 }

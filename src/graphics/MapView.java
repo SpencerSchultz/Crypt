@@ -4,12 +4,7 @@ package graphics;
 
 import static org.lwjgl.opengl.GL11.*; //go back a d delete improts I dont need
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
-import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
 
 import data.GameMap;
 import data.Player;
